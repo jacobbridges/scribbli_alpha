@@ -1,0 +1,51 @@
+{% extends "_layout/_base.html" %}
+
+{% block title %}Scribbli - Characters - {{ character.name }}{% endblock %}
+
+{% block body %}
+    <h1>{{ character.name }}</h1>
+
+    <!-- Details -->
+    <table>
+        <tbody>
+        <tr>
+            <td>Author</td>
+            <td>{{ character.owner.username }}</td>
+        </tr>
+        <tr>
+            <td>Home World</td>
+            <td><a href="{% url "universe_world_detail" character.home_world_id %}">{{ character.home_world.name }}</a>
+            </td>
+        </tr>
+        <tr>
+            <td>Current World</td>
+            <td>
+                {% if character.current_world %}
+                    <a href="{% url "universe_world_detail" character.current_world_id %}">{{ character.current_world.name }}</a>
+                {% else %}
+                    <i style="color: rebeccapurple">Void</i>
+                    {# TODO: Replace with special void world. #}
+                {% endif %}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    
+    <!-- Description -->
+    <p>
+        {{ character.description }}
+    </p>
+
+    {% if is_owner %}
+        <h2>Owner-Only Actions</h2>
+        <ul>
+            <li>
+                <a href="{% url 'universe_character_update' character.pk %}">Edit Character</a>
+                {# TODO: Link to character edit page when ready. #}
+            </li>
+        </ul>
+    {% endif %}
+
+    {# TODO: Add section for character history (post timeline). #}
+
+{% endblock %}

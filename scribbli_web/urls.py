@@ -35,7 +35,13 @@ urlpatterns = [
     path('universe/world/new/', scribbli_views.WorldCreateView.as_view(), name='universe_world_create'),
     path('universe/world/<int:pk>/', scribbli_views.WorldDetailView.as_view(), name='universe_world_detail'),
     path('universe/world/<int:pk>/edit/', scribbli_views.WorldUpdateView.as_view(), name='universe_world_update'),
-    path('universe/world/<int:world_id>/story/new/', scribbli_views.StoryCreateView.as_view(), name='universe_story_create'),
+    path('universe/world/<int:pk>/story/new/', scribbli_views.StoryCreateView.as_view(), name='universe_story_create'),
+    path('universe/world/<int:pk>/stories/', scribbli_views.WorldStoryListView.as_view(), name='universe_world_story_list'),
+    path('universe/world/<int:pk>/character/new/', scribbli_views.CharacterCreateView.as_view(), name='universe_character_create'),
+    path('universe/world/<int:pk>/natives/', scribbli_views.WorldCharacterListView.as_view(leaf='natives'), name='universe_world_native_list'),
+    path('universe/world/<int:pk>/residents/', scribbli_views.WorldCharacterListView.as_view(leaf='residents'), name='universe_world_resident_list'),
+    path('universe/character/<int:pk>/', scribbli_views.CharacterDetailView.as_view(), name='universe_character_detail'),
+    path('universe/character/<int:pk>/edit/', scribbli_views.CharacterUpdateView.as_view(), name='universe_character_update'),
 
     # Story urls
     path('story/<int:pk>/', scribbli_views.StoryDetailView.as_view(), name='story_detail')

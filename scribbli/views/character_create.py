@@ -2,12 +2,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView
 from django.urls import reverse
 
-from scribbli.models import Story, World
+from scribbli.models import Character, World
 
 
-class StoryCreateView(LoginRequiredMixin, CreateView):
-    template_name = 'universe/story-create.html'
-    model = Story
+class CharacterCreateView(LoginRequiredMixin, CreateView):
+    template_name = 'universe/character-create.html'
+    model = Character
     fields = ['name', 'description']
 
     @property
@@ -26,11 +26,12 @@ class StoryCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.owner = self.request.user
-        form.instance.world = self.world
+        form.instance.home_world = self.world
+        form.instance.current_world = self.world
         return super().form_valid(form)
 
     def get_success_url(self):
         return reverse(
-            'story_detail',
+            'universe_character_detail',
             kwargs={'pk': self.object.pk}
         )

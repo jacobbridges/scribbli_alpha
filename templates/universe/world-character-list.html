@@ -1,0 +1,29 @@
+{% extends "_layout/_base.html" %}
+
+{% block title %}Scribbli | {{ leaf|capfirst }} of {{ world.name }}{% endblock %}
+
+{% block body %}
+    <h1>{{ leaf|capfirst }} of {{ world.name }}</h1>
+    
+    <div>
+        {% if leaf == 'natives' %}
+            <small>
+                <a href="{% url "universe_character_create" world.pk %}">Create a character for {{ world.name }}</a>
+            </small>
+    {% endif %}
+    </div>
+    
+    <ul>
+        {% for character in characters %}
+            <li>
+                <a href="{% url "universe_character_detail" character.pk %}">{{ character.name }}</a>
+            </li>
+        {% empty %}
+            {% if leaf == 'natives' %}
+                <li>No characters are native to this world.</li>
+            {% elif leaf == 'residents' %}
+                <li>No characters currently reside in this world.</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endblock %}

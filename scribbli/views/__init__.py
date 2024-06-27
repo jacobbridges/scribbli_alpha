@@ -5,5 +5,10 @@ from .world_list import WorldListView
 from .world_detail import WorldDetailView
 from .world_create import WorldCreateView
 from .world_update import WorldUpdateView
+from .world_story_list import WorldStoryListView
+from .world_character_list import WorldCharacterListView
 from .story_create import StoryCreateView
 from .story_detail import StoryDetailView
+from .character_create import CharacterCreateView
+from .character_detail import CharacterDetailView
+from .character_update import CharacterUpdateView

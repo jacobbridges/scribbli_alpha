@@ -1,0 +1,23 @@
+{% extends "_layout/_base.html" %}
+
+{% block title %}Scribbli | Edit {{ character.name }}{% endblock %}
+
+{% block body %}
+    <h1>Edit Character</h1>
+    
+    <form method="post" action="{% url 'universe_character_update' character.id %}">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>{{ form.name.label_tag }}</td>
+                <td>{{ form.name }}</td>
+            </tr>
+            <tr>
+                <td>{{ form.description.label_tag }}</td>
+                <td>{{ form.description }}</td>
+            </tr>
+        </table>
+    
+        <input type="submit" value="Update">
+    </form>
+{% endblock %}

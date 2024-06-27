@@ -1,0 +1,23 @@
+{% extends "_layout/_base.html" %}
+
+{% block title %}Scribbli | Stories of {{ world.name }}{% endblock %}
+
+{% block body %}
+    <h1>Stories of {{ world.name }}</h1>
+    
+    <div>
+        <small>
+            <a href="{% url "universe_story_create" world.pk %}">New Story</a>
+        </small>
+    </div>
+    
+    <ul>
+        {% for story in stories %}
+            <li>
+                <a href="{% url "story_detail" story.pk %}">{{ story.name }}</a>
+            </li>
+        {% empty %}
+            <li>There are no stories yet on this world.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
