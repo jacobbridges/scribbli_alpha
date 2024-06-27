@@ -8,7 +8,7 @@
     <div>
         {% if leaf == 'natives' %}
             <small>
-                <a href="{% url "universe_character_create" world.pk %}">Create a character for {{ world.name }}</a>
+                <a href="{% url "universe_character_create" world.id %}">Create a character for {{ world.name }}</a>
             </small>
     {% endif %}
     </div>
@@ -16,7 +16,7 @@
     <ul>
         {% for character in characters %}
             <li>
-                <a href="{% url "universe_character_detail" character.pk %}">{{ character.name }}</a>
+                <a href="{% url "universe_character_detail" character.id %}">{{ character.name }}</a>
             </li>
         {% empty %}
             {% if leaf == 'natives' %}

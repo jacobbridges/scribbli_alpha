@@ -30,7 +30,7 @@
         </tr>
         </tbody>
     </table>
-    
+
     <!-- Description -->
     <p>
         {{ character.description }}
@@ -40,7 +40,7 @@
         <h2>Owner-Only Actions</h2>
         <ul>
             <li>
-                <a href="{% url 'universe_character_update' character.pk %}">Edit Character</a>
+                <a href="{% url 'universe_character_update' character.id %}">Edit Character</a>
                 {# TODO: Link to character edit page when ready. #}
             </li>
         </ul>

@@ -13,35 +13,35 @@
             </tr>
         </tbody>
     </table>
-    
+
     <h2>Links</h2>
     <ul>
         <li>
-            <a href="{% url 'universe_world_story_list' world.pk %}">Stories</a>
+            <a href="{% url 'universe_world_story_list' world.id %}">Stories</a>
         </li>
         <li>
-            <a href="{% url 'universe_world_native_list' world.pk %}">Natives</a>
+            <a href="{% url 'universe_world_native_list' world.id %}">Natives</a>
         </li>
         <li>
-            <a href="{% url 'universe_world_resident_list' world.pk %}">Residents</a>
+            <a href="{% url 'universe_world_resident_list' world.id %}">Residents</a>
         </li>
     </ul>
-    
+
     <h2>Actions</h2>
     <ul>
         <li>
-            <a href="{% url 'universe_story_create' world.pk %}">New Story</a>
+            <a href="{% url 'universe_story_create' world.id %}">New Story</a>
         </li>
         <li>
-            <a href="{% url 'universe_character_create' world.pk %}">New Character</a>
+            <a href="{% url 'universe_character_create' world.id %}">New Character</a>
         </li>
     </ul>
-    
+
     {% if is_owner %}
         <h2>Owner-Only Actions</h2>
         <ul>
             <li>
-                <a href="{% url 'universe_world_update' world.pk %}">Edit World</a>
+                <a href="{% url 'universe_world_update' world.id %}">Edit World</a>
                 {# TODO: Link to story edit page when ready. #}
             </li>
         </ul>

@@ -7,14 +7,14 @@
     
     <div>
         <small>
-            <a href="{% url "universe_story_create" world.pk %}">New Story</a>
+            <a href="{% url "universe_story_create" world.id %}">New Story</a>
         </small>
     </div>
     
     <ul>
         {% for story in stories %}
             <li>
-                <a href="{% url "story_detail" story.pk %}">{{ story.name }}</a>
+                <a href="{% url "story_detail" story.id %}">{{ story.name }}</a>
             </li>
         {% empty %}
             <li>There are no stories yet on this world.</li>
