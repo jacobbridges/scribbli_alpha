@@ -9,7 +9,7 @@ After more than a decade of re-writes due to my squabcous perfectionism, I have 
 
 Oh by golly, that's a mountain.
 
-** Universe [3/14]
+** Universe [7/16]
 
 *** DONE As a user, I should be able to list worlds.
     CLOSED: [2024-06-27 Thu 00:58]
@@ -17,11 +17,17 @@ Oh by golly, that's a mountain.
     CLOSED: [2024-06-27 Thu 00:58]
 *** DONE As a user, I should be able to view a world's page.
     CLOSED: [2024-06-27 Thu 00:58]
-*** TODO As a world owner, I should be able to edit my world.
+*** DONE As a world owner, I should be able to edit my world.
+    CLOSED: [2024-06-27 Thu 16:52]
 *** TODO As a world owner, I should be able to unlist my world.
 *** TODO As a world owner, I should be able to hide my world.
 *** TODO As a world owner, I should be able to invite other users to write in my private world.
-*** TODO As a user, I should be able to browse stories in a world.
+*** DONE As a user, I should be able to browse stories in a world.
+    CLOSED: [2024-06-27 Thu 16:52]
+*** DONE As a user, I should be able to browse characters native to a world.
+    CLOSED: [2024-06-27 Thu 16:53]
+*** DONE As a user, I should be able to browse characters residing in a world.
+    CLOSED: [2024-06-27 Thu 16:53]
 *** TODO As a user, I should be able to create a world with the same name as an existing world without complication.
 - Multiple worlds should be able to exist with the same name.
 - The system should create a distinction between the worlds.
@@ -33,9 +39,10 @@ Oh by golly, that's a mountain.
 *** TODO As a world owner, I should be able to add tags to my world.
 *** TODO As a user, I should be able to filter world list by tags.
 
-** Story [0/22]
+** Story [2/22]
 
-*** TODO As a user, I should be able to view a story's page.
+*** DONE As a user, I should be able to view a story's page.
+    CLOSED: [2024-06-27 Thu 16:52]
 *** TODO As a user, I should be able to create a story on a public world.
 *** TODO As a user, I should be able to create a story on my world.
 *** TODO As a story author, I should be able to unlist my story.
@@ -52,7 +59,8 @@ Oh by golly, that's a mountain.
 *** TODO As a story author, I should be able to add tags to my story.
 *** TODO As a user, I should be able to filter stories by tag.
 *** TODO As a writer, I should be able to create a character for a public world, invitation world, or personal world.
-*** TODO As a writer, I should be able to edit my character.
+*** DONE As a writer, I should be able to edit my character.
+    CLOSED: [2024-06-27 Thu 16:53]
 *** TODO As a writer, I should be able to submit an existing character to an open story.
 *** TODO As a story author, I should be able to review pending characters for my stories.
 *** TODO As a writer, I should be able to post as a character on approved stories or my stories.
