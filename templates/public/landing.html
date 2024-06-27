@@ -1,0 +1,279 @@
+{% extends "_layout/_base.html" %}
+
+{% block title %}Scribbli | Collaborative Story Writing Platform{% endblock %}
+
+{% block head_extras %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+        * {
+            color: #2E3D48;
+        }
+
+        body {
+            background-color: white;
+            transition: background-color 0.5s;
+        }
+
+        .showcase {
+            position: fixed;
+            top: 0;
+            display: table;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .content {
+            display: table-cell;
+            vertical-align: middle;
+            position: relative;
+            bottom: 10vh;
+        }
+
+        .brand {
+            text-align: center;
+            font-size: 32pt;
+            font-family: "Open Sans", sans-serif;
+            animation: fade
+        }
+
+        .title {
+            margin-bottom: 3vh;
+            transition: color 0.5s;
+        }
+
+        .intro {
+            margin: 0 auto;
+            width: 17.5rem;
+            font-size: 15pt;
+            font-family: "Open Sans", sans-serif;
+        }
+
+        #once-upon-a-time {
+            position: relative;
+            left: 1.5rem;
+        }
+
+        .blinking-cursor {
+            position: relative;
+            bottom: 1pt;
+            font-weight: 100;
+            font-size: 15pt;
+            color: black;
+            animation: 1.2s blink step-end infinite;
+        }
+
+        @keyframes blink {
+            from, to {
+                color: transparent;
+            }
+            50% {
+                color: black;
+            }
+        }
+
+        .fade {
+            opacity: 0;
+            animation: 0.75s ease-in 0.1s fade;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes fade {
+
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+
+        }
+
+        .attn {
+            position: fixed;
+            z-index: 10;
+            bottom: 8px;
+            right: 8px;
+            opacity: 0;
+            animation: 0.5s ease-in 4s fade;
+            animation-fill-mode: forwards;
+        }
+
+        .attn:hover {
+            cursor: pointer;
+        }
+
+        .success-icon {
+            position: fixed;
+            z-index: 9;
+            bottom: 8px;
+            right: 8px;
+            opacity: 0;
+        }
+
+        #alpha-c {
+            color: white;
+            visibility: hidden;
+        }
+
+        #lander {
+            color: white;
+            display: none;
+            width: 24rem;
+        }
+
+        .request-input {
+            background: rgba(0, 0, 0, 0);
+            border: none;
+            outline: none;
+            font-size: 15pt;
+            overflow-x: hidden;
+            color: white;
+            width: 14rem;
+            text-align: right;
+        }
+
+        #lander a {
+            color: white;
+        }
+
+        #lander a:hover {
+            color: white;
+        }
+
+        #lander a:visited {
+            color: white;
+        }
+
+        #lander a:link {
+            color: white;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="showcase">
+        <img class="attn" title="Request alpha access"
+             src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTYuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjMycHgiIGhlaWdodD0iMzJweCIgdmlld0JveD0iMCAwIDc5LjUzNiA3OS41MzYiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDc5LjUzNiA3OS41MzY7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPGc+Cgk8cGF0aCBkPSJNMzkuNzczLDEuMzFMMCwzMS4wMDR2NDcuMjIyaDc5LjUzNlYzMS4wMDRMMzkuNzczLDEuMzF6IE0yOC43NywyMi40OTkgICBjMS4xNjctMi4xMzMsMi43NzUtMy43MzksNC44MTUtNC44MDVjMi4wMzUtMS4wNzUsNC4zNTctMS42MTYsNi45ODMtMS42MTZjMi4yMTQsMCw0LjE5MSwwLjQzNSw1LjkyMSwxLjI5MiAgIGMxLjcyOSwwLjg3LDMuMDQ1LDIuMDk0LDMuOTY3LDMuNjg3YzAuOSwxLjU5NSwxLjM2NywzLjMzNCwxLjM2Nyw1LjIxN2MwLDIuMjQ3LTAuNjk0LDQuMjc5LTIuMDgyLDYuMDk3ICAgYy0xLjc0LDIuMjkyLTMuOTYxLDMuNDM2LTYuNjgsMy40MzZjLTAuNzMyLDAtMS4yNzktMC4xMjItMS42NTQtMC4zOGMtMC4zNjUtMC4yNjItMC42MjEtMC42MzItMC43NDMtMS4xMjkgICBjLTEuMDIyLDEuMDEyLTIuMjMxLDEuNTItMy41ODksMS41MmMtMS40NjUsMC0yLjY3OS0wLjUwNy0zLjY0My0xLjUwOWMtMC45NjYtMS4wMTItMS40NDctMi4zNjEtMS40NDctNC4wMzEgICBjMC0yLjA4NCwwLjU3OC0zLjk2NiwxLjc0My01LjY3MmMxLjQxNi0yLjA4NCwzLjIxOC0zLjEzLDUuNDI0LTMuMTNjMS41NzEsMCwyLjczMSwwLjYwMSwzLjQ3NSwxLjgwNWwwLjMzMS0xLjQ2OGgzLjUgICBsLTEuOTk4LDkuNDc5Yy0wLjEyNSwwLjYwNi0wLjE4NywwLjk4Ni0wLjE4NywxLjE2M2MwLDAuMjI4LDAuMDUyLDAuMzgsMC4xNDksMC40OTdjMC4wOTksMC4xMTEsMC4yMjMsMC4xNjUsMC4zNTcsMC4xNjUgICBjMC40MzYsMCwwLjk3OS0wLjI0OCwxLjY0Ni0wLjc2OWMwLjkwMS0wLjY2MywxLjYyNy0xLjU3NCwyLjE4MS0yLjY5NWMwLjU1NC0xLjEyOSwwLjgzOS0yLjI5OSwwLjgzOS0zLjUwOCAgIGMwLTIuMTY1LTAuNzgyLTMuOTc3LTIuMzUyLTUuNDQ1Yy0xLjU3My0xLjQ1LTMuNzctMi4xODUtNi41NzgtMi4xODVjLTIuMzkzLDAtNC40MTcsMC40ODctNi4wNzcsMS40NjggICBjLTEuNjYsMC45NjYtMi45MTMsMi4zNDMtMy43NjUsNC4xMTRjLTAuODM5LDEuNzYtMS4yNTgsMy42MDctMS4yNTgsNS41MmMwLDEuODU2LDAuNDc5LDMuNTUyLDEuNDExLDUuMDc0ICAgYzAuOTQ1LDEuNTMzLDIuMjYsMi42NDEsMy45NTYsMy4zNDVjMS42OTYsMC42OTcsMy42NDMsMS4wNDYsNS44MjgsMS4wNDZjMi4wOTcsMCwzLjkwOS0wLjI5Myw1LjQzMi0wLjg4MSAgIGMxLjUyMi0wLjU4NywyLjczOS0xLjQ1NywzLjY2Ni0yLjY0MWgyLjgwN2MtMC44OCwxLjc5Mi0yLjIyNywzLjE5Mi00LjA0OSw0LjIxNWMtMi4wOTIsMS4xNjMtNC42NCwxLjc0LTcuNjQ0LDEuNzQgICBjLTIuOTE4LDAtNS40MjYtMC40ODctNy41NDItMS40NjhjLTIuMTIxLTAuOTg2LTMuNjg5LTIuNDM0LTQuNzMtNC4zNWMtMS4wMjgtMS45MTgtMS41MzUtNC4wMDgtMS41MzUtNi4yNjggICBDMjcuMDE3LDI2Ljk1MiwyNy41OTUsMjQuNjQsMjguNzcsMjIuNDk5eiBNMi44MDQsMzEuOTQxbDI5LjM0NCwxOS42OEwyLjgwNCw3NC4zMzNWMzEuOTQxeiBNNS4wMzMsNzUuODQ0bDM0Ljc0LTI2Ljg4NSAgIGwzNC43MjksMjYuODg1SDUuMDMzeiBNNzYuNzI5LDc0LjMzM0w0Ny4zOTEsNTEuNjIxbDI5LjMzOS0xOS42OFY3NC4zMzN6IE00MS4yMDUsMjQuNjYxYzAuNDY2LDAuNTMxLDAuNjk5LDEuMjk1LDAuNjk5LDIuMjkyICAgYzAsMC44OTEtMC4xNzQsMS44NTYtMC41MTMsMi44NzljLTAuMzM0LDEuMDM2LTAuNzQzLDEuODI2LTEuMjA5LDIuMzYxYy0wLjMxOCwwLjM3NS0wLjY1OCwwLjY1Mi0wLjk5MiwwLjgyNiAgIGMtMC40MzksMC4yNDktMC45MDYsMC4zNy0xLjQxLDAuMzdjLTAuNjc0LDAuMDA2LTEuMjMtMC4yNjQtMS42OTEtMC43OTRjLTAuNDUtMC41MzEtMC42NzMtMS4zNDYtMC42NzMtMi40NjUgICBjMC0wLjgzOSwwLjE1OC0xLjgwNSwwLjQ4Ny0yLjg4OWMwLjMyOS0xLjA4OCwwLjgxLTEuOTE2LDEuNDUzLTIuNTA5YzAuNjQ3LTAuNTg4LDEuMzQ2LTAuODgxLDIuMS0wLjg4MSAgIEM0MC4xNjIsMjMuODU2LDQwLjc0OSwyNC4xMjUsNDEuMjA1LDI0LjY2MXoiIGZpbGw9IiMyZTNkNDgiLz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K"/>
+        <img class="success-icon" title="Your request is being reviewed"
+             src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI2IDI2IiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCAyNiAyNiIgd2lkdGg9IjMycHgiIGhlaWdodD0iMzJweCI+CiAgPHBhdGggZD0ibS4zLDE0Yy0wLjItMC4yLTAuMy0wLjUtMC4zLTAuN3MwLjEtMC41IDAuMy0wLjdsMS40LTEuNGMwLjQtMC40IDEtMC40IDEuNCwwbC4xLC4xIDUuNSw1LjljMC4yLDAuMiAwLjUsMC4yIDAuNywwbDEzLjQtMTMuOWgwLjF2LTguODgxNzhlLTE2YzAuNC0wLjQgMS0wLjQgMS40LDBsMS40LDEuNGMwLjQsMC40IDAuNCwxIDAsMS40bDAsMC0xNiwxNi42Yy0wLjIsMC4yLTAuNCwwLjMtMC43LDAuMy0wLjMsMC0wLjUtMC4xLTAuNy0wLjNsLTcuOC04LjQtLjItLjN6IiBmaWxsPSIjMmUzZDQ4Ii8+Cjwvc3ZnPgo="/>
+        <div class="content">
+            <div class="brand fade">
+                <h1 class="title"><span id="alpha-c">&#9082;</span>Scribbli</h1>
+            </div>
+            <div id="once-upon-a-time" class="intro">
+                <span class="typed"></span>
+                <span class="blinking-cursor">|</span>
+            </div>
+            <div id="lander" class="intro">
+                <form>
+                    <input id="email" class="request-input" type="text" value="hemingway@gmail.com"
+                           onClick="this.setSelectionRange(0, this.value.length)">
+                    <a href="#" type="sumbit" id="request-submit">Request Access</a>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function (event) {
+            // array with texts to type in typewriter
+            var dataText = ["Once upon a time"];
+
+            // type one text in the typwriter
+            // keeps calling itself until the text is finished
+            function typeWriter(text, i, fnCallback) {
+                // chekc if text isn't finished yet
+                if (i < (text.length)) {
+                    // add next character to h1
+                    document.querySelector(".typed").innerHTML = text.substring(0, i + 1) + '<span aria-hidden="true"></span>';
+
+                    // wait for a while and call this function again for next character
+                    setTimeout(function () {
+                        typeWriter(text, i + 1, fnCallback)
+                    }, 120);
+                }
+                // text finished, call callback if there is a callback function
+                else if (typeof fnCallback == 'function') {
+                    // call callback after timeout
+                    setTimeout(fnCallback, 700);
+                }
+            }
+
+            // start a typewriter animation for a text in the dataText array
+            function StartTextAnimation(i) {
+                if (typeof dataText[i] == 'undefined') {
+                    return null;
+                }
+                // check if dataText[i] exists
+                if (i < dataText[i].length) {
+                    // text exists! start typewriter animation
+                    typeWriter(dataText[i], 0, function () {
+                        // after callback (and whole text has been animated), start next text
+                        StartTextAnimation(i + 1);
+                    });
+                }
+            }
+
+            // start the text animation
+            setTimeout(function () {
+                StartTextAnimation(0);
+            }, 1000);
+
+            document.querySelector(".attn").addEventListener('click', function (event) {
+
+                document.querySelector('#alpha-c').style.visibility = 'visible';
+                document.querySelector('#once-upon-a-time').style.display = 'none';
+                document.querySelector('#lander').style.display = 'block';
+                TweenLite.to("body", 0, {backgroundColor: "#2E3D48"});
+                TweenLite.to(".title", 0, {color: "white"});
+                var alphaInput = document.querySelector('.request-input');
+                alphaInput.focus();
+                alphaInput.setSelectionRange(0, alphaInput.value.length);
+
+            });
+
+            var validateEmail = function (email) {
+                var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                return re.test(email) && email !== 'hemingway@gmail.com';
+            }
+
+            var requestInput = document.querySelector(".request-input");
+            requestInput.addEventListener('keyup', function () {
+
+                if (!validateEmail(requestInput.value)) {
+                    requestInput.style.color = '#f96377';
+                    return;
+                }
+
+                requestInput.style.color = 'white';
+
+            });
+
+            document.querySelector("#request-submit").addEventListener('click', function (event) {
+
+                event.preventDefault();
+
+                if (!validateEmail(requestInput.value)) {
+                    requestInput.style.color = '#f96377';
+                    return;
+                }
+
+                requestInput.style.color = 'white';
+
+                document.querySelector('#alpha-c').style.visibility = 'hidden';
+                document.querySelector('#once-upon-a-time').style.display = 'block';
+                document.querySelector('#lander').style.display = 'none';
+                document.querySelector('.attn').style.display = 'none';
+                document.querySelector('.success-icon').style.opacity = '1';
+                TweenLite.to("body", 0, {backgroundColor: "white"});
+                TweenLite.to(".title", 0, {color: "#2E3D48"});
+
+            });
+
+        });
+    </script>
+{% endblock %}

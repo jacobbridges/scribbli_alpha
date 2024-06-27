@@ -1,0 +1,19 @@
+{% extends "_layout/_base.html" %}
+
+{% block title %}Scribbli | World Creation{% endblock %}
+
+{% block body %}
+    <h1>Create a world</h1>
+    
+    <form method="post" action="{% url 'universe_world_create' %}">
+    {% csrf_token %}
+    <table>
+    <tr>
+        <td>{{ form.name.label_tag }}</td>
+        <td>{{ form.name }}</td>
+    </tr>
+    </table>
+    
+    <input type="submit" value="Create">
+    </form>
+{% endblock %}

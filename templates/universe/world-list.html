@@ -1,0 +1,17 @@
+{% extends "_layout/_base.html" %}
+
+{% block title %}Scribbli | Universe{% endblock %}
+
+{% block body %}
+    <h1>Universe</h1>
+    
+    <ul>
+        {% for world in worlds %}
+            <li>
+                <a href="{% url "universe_world_detail" world.id %}">{{ world.name }}</a>
+            </li>
+        {% empty %}
+            <li>You stare into the void of space. [What do you see?]</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

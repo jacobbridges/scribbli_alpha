@@ -1,0 +1,8 @@
+{% extends "_layout/_base.html" %}
+
+{% block title %}Scribbli - {{ world.name }}{% endblock %}
+
+{% block body %}
+    <h1>{{ world.name }}</h1>
+    <small>Created by: {{ world.owner.username }}</small>
+{% endblock %}

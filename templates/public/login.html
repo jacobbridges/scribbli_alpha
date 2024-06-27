@@ -1,0 +1,186 @@
+{% extends "_layout/_base.html" %}
+
+{% block title %}Scribbli | Login{% endblock %}
+
+{% block head_extras %}
+    <style>
+        @import url("https://fonts.googleapis.com/css?family=Open+Sans");
+
+        input {
+            outline: none;
+        }
+
+        input:focus {
+            outline: none;
+        }
+
+        body {
+            font-family: "Open Sans", sans-serif;
+            background-color: white;
+            color: #2E3D48;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header-full-page {
+            height: 100%;
+            width: 100%;
+        }
+
+        .content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .brand h1 {
+            font-size: 64pt;
+            margin: 0;
+            padding: 0;
+        }
+
+        form.login {
+            display: block;
+            width: 21rem;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: 2rem;
+        }
+
+        #alpha-c {
+            color: #ce1010;
+        }
+
+        input[type=text],
+        input[type=password] {
+            padding: 2px;
+            border: none;
+            border-bottom: solid 2px #c9c9c9;
+            transition: border 0.3s;
+        }
+
+        input[type=text]:focus,
+        input[type=password]:focus {
+            border-bottom: solid 2px #969696;
+        }
+
+        input[type=submit] {
+            padding: 0.5rem;
+            background: white;
+            border: 2px solid #c9c9c9;
+            border-radius: 5px;
+            color: #969696;
+            transition: color 0.3s, border 0.3s;
+        }
+
+        input[type=submit]:hover {
+            cursor: pointer;
+            color: #2E3D48;
+            border: solid 2px #969696;
+        }
+
+        .input-block {
+            margin: 1.5rem auto;
+        }
+
+        .input-block input {
+            font-size: 18pt;
+            width: 100%;
+        }
+
+        .form-errors {
+            margin: 1.5rem auto;
+            color: firebrick;
+            font-size: 12pt;
+        }
+
+        .helpful-links {
+            margin-top: -1.2rem;
+            font-size: 10pt;
+        }
+
+        .helpful-links a {
+            color: #4747f2;
+        }
+
+        .helpful-links a:hover {
+            color: #7676f6;
+        }
+
+        .helpful-links a:visited {
+            color: #0a0a96;
+        }
+
+        .helpful-links a:first-child {
+            float: left;
+        }
+
+        .helpful-links a:last-child {
+            float: right;
+        }
+
+        .fade {
+            opacity: 0;
+            animation: 0.75s ease-in 0.1s fade;
+            animation-fill-mode: forwards;
+        }
+
+        .fade-second {
+            opacity: 0;
+            animation: 0.75s ease-in 0.5s fade;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes fade {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="header-full-page">
+        <div class="content">
+            <div class="brand fade">
+                <h1>
+                    <span id="alpha-c">&#9082;</span>Scribbli
+                </h1>
+            </div>
+            <form class="login fade-second" method="post" action="{% url 'public_login' %}">
+                {% csrf_token %}
+                <div class="input-block">
+                    <input name="username"
+                           type="text"
+                           placeholder="Username"
+                           autocomplete="off">
+                </div>
+                <div class="input-block">
+                    <input name="password"
+                           type="password"
+                           placeholder="Password"
+                           autocomplete="off">
+                </div>
+                <div class="form-errors">
+                    {% if form.errors %}
+                        <p>Your username and password didn't match. Please try again.</p>
+                    {% endif %}
+                </div>
+                <div class="input-block">
+                    <input type="submit"
+                           name="Submit"
+                           value="Login"/>
+                </div>
+                <input type="hidden" name="next" value="{{ next }}">
+                <div class="helpful-links">
+                    <a href="#">Forgot Password</a>
+                    <a href="#">Request Access</a>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

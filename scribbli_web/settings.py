@@ -123,3 +123,15 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Define a custom user model
+# https://docs.djangoproject.com/en/5.0/topics/auth/customizing/#using-a-custom-user-model-when-starting-a-project
+
+AUTH_USER_MODEL = 'scribbli.User'
+
+
+# Site login url
+# https://docs.djangoproject.com/en/5.0/ref/settings/#login-url
+
+LOGIN_URL = 'public_login'

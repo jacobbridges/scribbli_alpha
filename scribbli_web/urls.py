@@ -17,6 +17,21 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from scribbli import views as scribbli_views
+
 urlpatterns = [
+    # 3rd party urls
     path('admin/', admin.site.urls),
+
+    # Public urls
+    path('', scribbli_views.LandingView.as_view(), name='public_landing'),
+    path('login/', scribbli_views.LoginView.as_view(), name='public_login'),
+
+    # User urls
+    path('home/', scribbli_views.HomeView.as_view(), name='user_home'),
+
+    # Universe urls
+    path('universe/', scribbli_views.WorldListView.as_view(), name='universe_world_list'),
+    path('universe/world/new/', scribbli_views.WorldCreateView.as_view(), name='universe_world_create'),
+    path('universe/world/<int:pk>/', scribbli_views.WorldDetailView.as_view(), name='universe_world_detail'),
 ]
