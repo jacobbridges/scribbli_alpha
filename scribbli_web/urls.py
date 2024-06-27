@@ -34,4 +34,9 @@ urlpatterns = [
     path('universe/', scribbli_views.WorldListView.as_view(), name='universe_world_list'),
     path('universe/world/new/', scribbli_views.WorldCreateView.as_view(), name='universe_world_create'),
     path('universe/world/<int:pk>/', scribbli_views.WorldDetailView.as_view(), name='universe_world_detail'),
+    path('universe/world/<int:pk>/edit/', scribbli_views.WorldUpdateView.as_view(), name='universe_world_update'),
+    path('universe/world/<int:world_id>/story/new/', scribbli_views.StoryCreateView.as_view(), name='universe_story_create'),
+
+    # Story urls
+    path('story/<int:pk>/', scribbli_views.StoryDetailView.as_view(), name='story_detail')
 ]

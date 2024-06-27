@@ -1,0 +1,44 @@
+{% extends "_layout/_base.html" %}
+
+{% block title %}Scribbli - Ready {{ story.name }}{% endblock %}
+
+{% comment %}
+	Eventually this page will be split out into multiple pages:
+	    - [ ] Page which story owner sees.
+	    - [ ] Page which co-authors see.
+	    - [ ] Page which everyone else sees.
+{% endcomment %}
+
+{% block body %}
+    <h1>{{ story.name }}</h1>
+    <small>Author: {{ story.owner.username }}</small>
+    <p>
+        {{ story.description }}
+    </p>
+
+    <h2>Characters</h2>
+    <ul>
+        {% for character in story.characters %}
+            <li><a href="#">{{ character.name }}</a></li>
+            {# TODO: Link to character detail page when ready. #}
+        {% empty %}
+            <li>No characters (yet).</li>
+            {# TODO: Link to character creation page when ready. #}
+        {% endfor %}
+    </ul>
+
+    {% if is_owner %}
+        <h2>Owner-Only Actions</h2>
+        <ul>
+            <li>
+                <a href="#">Edit Story</a>
+                {# TODO: Link to story edit page when ready. #}
+            </li>
+            <li>
+                <a href="#">Manage Threads</a>
+                {# TODO: Link to thread management page when ready. #}
+            </li>
+        </ul>
+    {% endif %}
+
+{% endblock %}
