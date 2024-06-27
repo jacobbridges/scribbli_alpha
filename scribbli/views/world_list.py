@@ -7,3 +7,4 @@ from scribbli.models import World
 class WorldListView(LoginRequiredMixin, ListView):
     model = World
     template_name = 'universe/world-list.html'
+    context_object_name = 'worlds'
