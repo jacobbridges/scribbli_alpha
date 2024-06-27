@@ -5,4 +5,14 @@
 {% block body %}
     <h1>{{ world.name }}</h1>
     <small>Created by: {{ world.owner.username }}</small>
+    
+    {% if is_owner %}
+        <h2>Owner-Only Actions</h2>
+        <ul>
+            <li>
+                <a href="{% url 'universe_world_update' world.pk %}">Edit World</a>
+                {# TODO: Link to story edit page when ready. #}
+            </li>
+        </ul>
+    {% endif %}
 {% endblock %}
