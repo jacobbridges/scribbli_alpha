@@ -1,0 +1,85 @@
+#+STARTUP: logdone
+
+* Scribbli Web
+
+After more than a decade of re-writes due to my squabcous perfectionism, I have no words. Here is Scribbli, the least of it.
+
+
+* TODOS
+
+Oh by golly, that's a mountain.
+
+** Universe [3/14]
+
+*** DONE As a user, I should be able to list worlds.
+    CLOSED: [2024-06-27 Thu 00:58]
+*** DONE As a user, I should be able to create a world.
+    CLOSED: [2024-06-27 Thu 00:58]
+*** DONE As a user, I should be able to view a world's page.
+    CLOSED: [2024-06-27 Thu 00:58]
+*** TODO As a world owner, I should be able to edit my world.
+*** TODO As a world owner, I should be able to unlist my world.
+*** TODO As a world owner, I should be able to hide my world.
+*** TODO As a world owner, I should be able to invite other users to write in my private world.
+*** TODO As a user, I should be able to browse stories in a world.
+*** TODO As a user, I should be able to create a world with the same name as an existing world without complication.
+- Multiple worlds should be able to exist with the same name.
+- The system should create a distinction between the worlds.
+  - Maybe: world#0001
+  - Maybe: world (by nivix)
+*** TODO As a user, I should be able to search for worlds by keyword.
+*** TODO As a user, I should be able to sort worlds by newest / oldest.
+*** TODO As a user, I should be able to sort worlds by most recent activity.
+*** TODO As a world owner, I should be able to add tags to my world.
+*** TODO As a user, I should be able to filter world list by tags.
+
+** Story [0/22]
+
+*** TODO As a user, I should be able to view a story's page.
+*** TODO As a user, I should be able to create a story on a public world.
+*** TODO As a user, I should be able to create a story on my world.
+*** TODO As a story author, I should be able to unlist my story.
+*** TODO As a story author, I should be able to hide my story.
+*** TODO As a story author, I should be able to edit my story's details.
+*** TODO As a story author, I should be able to mark my story as "open" or "closed".
+*** TODO As a story author, I should be able to create new chapters for my story.
+*** TODO As a story author, I should be able to create narrative posts on my stories.
+*** TODO As a user, I should be able to read story chapters.
+*** TODO As a user, I should be able to list all public stories.
+*** TODO As a user, I should be able to filter stories by "open".
+*** TODO As a user, I should be able to sort stories by newest / oldest.
+*** TODO As a user, I should be able to sort stories by most recent activity.
+*** TODO As a story author, I should be able to add tags to my story.
+*** TODO As a user, I should be able to filter stories by tag.
+*** TODO As a writer, I should be able to create a character for a public world, invitation world, or personal world.
+*** TODO As a writer, I should be able to edit my character.
+*** TODO As a writer, I should be able to submit an existing character to an open story.
+*** TODO As a story author, I should be able to review pending characters for my stories.
+*** TODO As a writer, I should be able to post as a character on approved stories or my stories.
+*** TODO As a user, I should be able to see a character's history by listing their posts in chronological order.
+
+* Devlog
+
+Can you make buckets or biscuits of this?
+
+** Decisions
+
+*** 2024-06-25
+ - Start over in Django 5.0
+   - Back to what I know best.
+   - Just get it done, m8.
+   - Not sure why I'm talking to myself via devlop, must really be dreading the rewrite.
+ - Do not create a separate React client right now - use Django templates with htmx.
+ - Remove the concept of regions (can add later if needed).
+   - Regions existed as a Universe construct beneath worlds - giving users the ability to create infinitely nested locations. It might come back later, but for now let's keep it simple, yeah?
+
+*** 2024-06-26
+- Do not try anything fancy, keep it simple for now.
+  - Use case: Tried to force a single view (~/~) to load a different view if user was logged in or not (Landing page if not logged in, homepage if logged in). Decided to keep it simple and just use two different urls.
+- Do not use *slugs* for worlds, stories, etc.
+  - Slugs add complexity for very little benefit.
+  - Example complexity:  Which layer in Django should calculate the slug? Django signals? Override model.save? Create a custom form?
+  - What are the benefits?
+    - SEO? Most of the site will be behind a login wall.
+    - Users knowing “at a glance” where they are? Most users will likely be accessing the site from an app or their phone.
+- 
