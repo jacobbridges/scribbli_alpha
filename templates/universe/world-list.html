@@ -5,6 +5,12 @@
 {% block body %}
     <h1>Universe</h1>
     
+    <div>
+        <small>
+            <a href="{% url "universe_world_create" %}">New World</a>
+        </small>
+    </div>
+    
     <ul>
         {% for world in worlds %}
             <li>
