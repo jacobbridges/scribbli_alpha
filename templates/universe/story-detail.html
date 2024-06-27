@@ -26,7 +26,7 @@
             {# TODO: Link to character creation page when ready. #}
         {% endfor %}
     </ul>
-    
+
     <h2>Links</h2>
     <ul>
         <li>
@@ -38,8 +38,7 @@
         <h2>Owner-Only Actions</h2>
         <ul>
             <li>
-                <a href="#">Edit Story</a>
-                {# TODO: Link to story edit page when ready. #}
+                <a href="{% url 'story_update' story.id %}">Edit Story</a>
             </li>
             <li>
                 <a href="#">Manage Threads</a>

@@ -9,6 +9,7 @@ from .world_story_list import WorldStoryListView
 from .world_character_list import WorldCharacterListView
 from .story_create import StoryCreateView
 from .story_detail import StoryDetailView
+from .story_update import StoryUpdateView
 from .character_create import CharacterCreateView
 from .character_detail import CharacterDetailView
 from .character_update import CharacterUpdateView

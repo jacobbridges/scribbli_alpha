@@ -44,5 +44,6 @@ urlpatterns = [
     path('universe/character/<int:pk>/edit/', scribbli_views.CharacterUpdateView.as_view(), name='universe_character_update'),
 
     # Story urls
-    path('story/<int:pk>/', scribbli_views.StoryDetailView.as_view(), name='story_detail')
+    path('story/<int:pk>/', scribbli_views.StoryDetailView.as_view(), name='story_detail'),
+    path('story/<int:pk>/edit/', scribbli_views.StoryUpdateView.as_view(), name='story_update'),
 ]
