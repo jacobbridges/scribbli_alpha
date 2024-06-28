@@ -39,11 +39,11 @@ Oh by golly, that's a mountain.
 *** TODO As a world owner, I should be able to add tags to my world.
 *** TODO As a user, I should be able to filter world list by tags.
 
-** Story [2/22]
+** Story [4/22]
 
 *** DONE As a user, I should be able to view a story's page.
     CLOSED: [2024-06-27 Thu 16:52]
-*** TODO As a user, I should be able to create a story on a public world.
+*** TODO As a user, I should be able to create a story on a public world.*
 *** TODO As a user, I should be able to create a story on my world.
 *** TODO As a story author, I should be able to unlist my story.
 *** TODO As a story author, I should be able to hide my story.
@@ -61,8 +61,10 @@ Oh by golly, that's a mountain.
 *** TODO As a writer, I should be able to create a character for a public world, invitation world, or personal world.
 *** DONE As a writer, I should be able to edit my character.
     CLOSED: [2024-06-27 Thu 16:53]
-*** TODO As a writer, I should be able to submit an existing character to an open story.
-*** TODO As a story author, I should be able to review pending characters for my stories.
+*** DONE As a writer, I should be able to submit an existing character to an open story.
+    CLOSED: [2024-06-28 Fri 01:06]
+*** DONE As a story author, I should be able to review pending characters for my stories.
+    CLOSED: [2024-06-28 Fri 01:06]
 *** TODO As a writer, I should be able to post as a character on approved stories or my stories.
 *** TODO As a user, I should be able to see a character's history by listing their posts in chronological order.
 

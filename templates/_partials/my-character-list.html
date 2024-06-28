@@ -1,0 +1,11 @@
+<ul>
+    {% for character in characters %}
+        <li>
+            <a href="{% url 'universe_character_detail' character.id %}">{{ character.name }}</a>
+        </li>
+    {% empty %}
+        <li>
+            You have no characters. Explore the universe and create a character on a world.
+        </li>
+    {% endfor %}
+</ul>

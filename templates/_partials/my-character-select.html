@@ -1,0 +1,24 @@
+<fieldset>
+    <legend>Select a character:</legend>
+
+    {% for character in characters %}
+
+        <div>
+            <input
+                    type="radio"
+                    id="character-{{ character.id }}"
+                    name="character_id"
+                    value="{{ character.id }}"
+                    {% if forloop.first %}checked{% endif %}
+            />
+            <label for="character-{{ character.id }}">{{ character.name }}</label>
+        </div>
+
+    {% empty %}
+
+        <div>
+            <p>Nothing to see here lol.</p>
+        </div>
+
+    {% endfor %}
+</fieldset>

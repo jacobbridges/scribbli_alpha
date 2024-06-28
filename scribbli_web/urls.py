@@ -17,33 +17,37 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from scribbli import views as scribbli_views
+from scribbli import views as sv
 
 urlpatterns = [
     # 3rd party urls
     path('admin/', admin.site.urls),
 
     # Public urls
-    path('', scribbli_views.LandingView.as_view(), name='public_landing'),
-    path('login/', scribbli_views.LoginView.as_view(), name='public_login'),
+    path('', sv.LandingView.as_view(), name='public_landing'),
+    path('login/', sv.LoginView.as_view(), name='public_login'),
 
-    # User urls
-    path('home/', scribbli_views.HomeView.as_view(), name='user_home'),
+    # My (current user specific) urls
+    path('my/home/', sv.HomeView.as_view(), name='my_home'),
+    path('my/p/characters-select/', sv.MyPartialCharacterListView.as_view(purpose='select'), name='my_p_characters_select'),
 
     # Universe urls
-    path('universe/', scribbli_views.WorldListView.as_view(), name='universe_world_list'),
-    path('universe/world/new/', scribbli_views.WorldCreateView.as_view(), name='universe_world_create'),
-    path('universe/world/<int:pk>/', scribbli_views.WorldDetailView.as_view(), name='universe_world_detail'),
-    path('universe/world/<int:pk>/edit/', scribbli_views.WorldUpdateView.as_view(), name='universe_world_update'),
-    path('universe/world/<int:pk>/story/new/', scribbli_views.StoryCreateView.as_view(), name='universe_story_create'),
-    path('universe/world/<int:pk>/stories/', scribbli_views.WorldStoryListView.as_view(), name='universe_world_story_list'),
-    path('universe/world/<int:pk>/character/new/', scribbli_views.CharacterCreateView.as_view(), name='universe_character_create'),
-    path('universe/world/<int:pk>/natives/', scribbli_views.WorldCharacterListView.as_view(leaf='natives'), name='universe_world_native_list'),
-    path('universe/world/<int:pk>/residents/', scribbli_views.WorldCharacterListView.as_view(leaf='residents'), name='universe_world_resident_list'),
-    path('universe/character/<int:pk>/', scribbli_views.CharacterDetailView.as_view(), name='universe_character_detail'),
-    path('universe/character/<int:pk>/edit/', scribbli_views.CharacterUpdateView.as_view(), name='universe_character_update'),
+    path('universe/', sv.WorldListView.as_view(), name='universe_world_list'),
+    path('universe/world/new/', sv.WorldCreateView.as_view(), name='universe_world_create'),
+    path('universe/world/<int:pk>/', sv.WorldDetailView.as_view(), name='universe_world_detail'),
+    path('universe/world/<int:pk>/edit/', sv.WorldUpdateView.as_view(), name='universe_world_update'),
+    path('universe/world/<int:pk>/story/new/', sv.StoryCreateView.as_view(), name='universe_story_create'),
+    path('universe/world/<int:pk>/stories/', sv.WorldStoryListView.as_view(), name='universe_world_story_list'),
+    path('universe/world/<int:pk>/character/new/', sv.CharacterCreateView.as_view(), name='universe_character_create'),
+    path('universe/world/<int:pk>/natives/', sv.WorldCharacterListView.as_view(leaf='natives'), name='universe_world_native_list'),
+    path('universe/world/<int:pk>/residents/', sv.WorldCharacterListView.as_view(leaf='residents'), name='universe_world_resident_list'),
+    path('universe/character/<int:pk>/', sv.CharacterDetailView.as_view(), name='universe_character_detail'),
+    path('universe/character/<int:pk>/edit/', sv.CharacterUpdateView.as_view(), name='universe_character_update'),
 
     # Story urls
-    path('story/<int:pk>/', scribbli_views.StoryDetailView.as_view(), name='story_detail'),
-    path('story/<int:pk>/edit/', scribbli_views.StoryUpdateView.as_view(), name='story_update'),
+    path('story/<int:pk>/', sv.StoryDetailView.as_view(), name='story_detail'),
+    path('story/<int:pk>/edit/', sv.StoryUpdateView.as_view(), name='story_update'),
+    path('story/<int:pk>/join_request/new/', sv.StoryJoinRequestSubmitView.as_view(), name='story_join_request_submit'),
+    path('story/<int:pk>/join-requests/', sv.StoryJoinRequestList.as_view(), name='story_join_request_list'),
+    path('story/<int:pk>/join-request/resolve/', sv.StoryJoinRequestResolveView.as_view(), name='story_join_request_resolve'),
 ]

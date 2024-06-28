@@ -27,9 +27,3 @@ class IsOwnerMixin(UserPassesTestMixin):
             )
             return False
         return self.request.user == self.object.owner
-
-    # def handle_no_permission(self):
-    #     if self.request.user.is_authenticated:
-    #         return HttpResponseNotFound()
-    #     else:
-    #         return super()

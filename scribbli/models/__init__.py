@@ -5,3 +5,6 @@ from .universe import Universe
 from .user import User
 from .world import World
 from .character import Character
+
+# weird
+from .story_character_join_request import StoryCharacterJoinRequest

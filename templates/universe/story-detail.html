@@ -19,13 +19,69 @@
     <h2>Characters</h2>
     <ul>
         {% for character in story.characters.all %}
-            <li><a href="#">{{ character.name }}</a></li>
-            {# TODO: Link to character detail page when ready. #}
+            <li>
+                <a href="{% url 'universe_character_detail' character.id %}">{{ character.name }}</a>
+            </li>
+            {% if forloop.last %}
+                <li>
+                    {% if user.characters.exists %}
+                        <a href="javascript:"
+                           _="on click show #join-request-box"
+                           hx-get="{% url 'my_p_characters_select' %}"
+                           hx-trigger="click"
+                           hx-target="#my-character-list"
+                           hx-swap="outerHTML"
+                        >
+                            Submit one of your own?
+                        </a>
+                    {% else %}
+                        To join this story, you must first
+                        <a href="{% url 'universe_character_create' story.world_id %}">create a character.</a>
+                    {% endif %}
+                </li>
+            {% endif %}
         {% empty %}
-            <li>No characters (yet).</li>
-            {# TODO: Link to character creation page when ready. #}
+            <li>
+                No characters (yet).
+                {% if user.characters.exists %}
+                    <a href="javascript:"
+                       _="on click show #join-request-box"
+                       hx-get="{% url 'my_p_characters_select' %}"
+                       hx-trigger="click"
+                       hx-target="#my-character-list"
+                       hx-swap="outerHTML"
+                    >
+                        Join with one of your characters?
+                    </a>
+                {% else %}
+                    To join this story, you must first
+                    <a href="{% url 'universe_character_create' story.world_id %}">create a character.</a>
+                {% endif %}
+            </li>
         {% endfor %}
     </ul>
+
+    <div id="join-request-box" style="display:none">
+        <h2>
+            Request to join this story
+            <a
+                    href="javascript:"
+                    _="on click hide #join-request-box"
+            >x</a>
+        </h2>
+        <form
+                hx-post="{% url 'story_join_request_submit' story.id %}"
+                _="on submit hide me then show #join-request-box-done then wait 100ms set #join-request-box-done.innerText to my.innerText"
+        >
+            {% csrf_token %}
+            <div id="my-character-list">
+            </div>
+            <input type="submit" value="Send Join Request">
+        </form>
+        <div id="join-request-box-done" style="display:none">
+            Loading...
+        </div>
+    </div>
 
     <h2>Links</h2>
     <ul>
@@ -43,6 +99,9 @@
             <li>
                 <a href="#">Manage Threads</a>
                 {# TODO: Link to thread management page when ready. #}
+            </li>
+            <li>
+                <a href="{% url 'story_join_request_list' story.id %}">View Join Requests</a>
             </li>
         </ul>
     {% endif %}

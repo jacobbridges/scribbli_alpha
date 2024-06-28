@@ -1,0 +1,37 @@
+{% extends "_layout/_base.html" %}
+
+{% block title %}Scribbli - Join Requests for {{ story.name }}{% endblock %}
+
+{% block body %}
+    <h1>Join Requests</h1>
+    
+    <table>
+        <tbody>
+            {% for jr in join_requests %}
+            <tr>
+                <td><a href="{% url 'universe_character_detail' jr.character.id %}">{{ jr.character.name }}</a></td>
+                <td>
+                    <form>
+                        {% csrf_token %}
+                        <input type="hidden" name="join_request_id" value="{{ jr.id }}">
+                        <input type="hidden" name="status" value="{{ status_choices.APPROVED }}">
+                        <a href="javascript:" hx-post="{% url 'story_join_request_resolve' story.id %}" hx-trigger="click" hx-target="closest tr">Approve</a>
+                    </form>
+                </td>
+                <td>
+                    <form>
+                        {% csrf_token %}    
+                        <input type="hidden" name="join_request_id" value="{{ jr.id }}">
+                        <input type="hidden" name="status" value="{{ status_choices.DENIED }}">
+                        <a href="javascript:" hx-post="{% url 'story_join_request_resolve' story.id %}" hx-trigger="click" hx-target="closest tr">Deny</a>
+                    </form>
+                </td>
+            </tr>
+            {% empty %}
+                <tr>
+                    <td>No new character requests.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
