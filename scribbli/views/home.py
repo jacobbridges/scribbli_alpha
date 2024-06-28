@@ -9,7 +9,7 @@ class HomeView(LoginRequiredMixin, TemplateView):
         user = self.request.user
         kwargs.update({
             'user_worlds': user.worlds.all(),
-            'user_worlds': user.stories.all(),
-            'user_characters': [], # TODO: Update when characters are a thing.
+            'user_stories': user.stories.all(),
+            'user_characters': user.characters.all(),
         })
         return kwargs

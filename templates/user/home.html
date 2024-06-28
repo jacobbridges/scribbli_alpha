@@ -8,6 +8,9 @@
     <h2>Your Worlds</h2>
     <ul>
         {% for world in user_worlds %}
+            <li>
+                <a href="{% url 'universe_world_detail' world.id %}">{{ world.name }}</a>
+            </li>
         {% empty %}
             {% comment %}TODO: Update link when world creation page is available.{% endcomment %}
             <li>You have not created any worlds yet, [start here]!</li>
@@ -17,9 +20,11 @@
     <h2>Your Stories</h2>
     <ul>
         {% for story in user_stories %}
+            <li>
+                <a href="{% url 'story_detail' story.id %}">{{ story.name }}</a>
+            </li>
         {% empty %}
             {% comment %}
-                TODO: Update link when story creation page is available.
                 TODO: Add tabbed filters for "I am authoring" and "I am reading".
             {% endcomment %}
             <li>You have not written any stories yet, [explore the universe and write your first story]!</li>
@@ -29,6 +34,9 @@
     <h2>Your Characters</h2>
     <ul>
         {% for character in user_characters %}
+            <li>
+                <a href="{% url 'universe_character_detail' character.id %}">{{ character.name }}</a>
+            </li>
         {% empty %}
             <li>You do not have any characters, [explore the universe and make your first character]!</li>
         {% endfor %}
