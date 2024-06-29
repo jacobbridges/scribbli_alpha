@@ -9,7 +9,7 @@ After more than a decade of re-writes due to my squabcous perfectionism, I have 
 
 Oh by golly, that's a mountain.
 
-** Universe [7/16]
+** Universe [8/15]
 
 *** DONE As a user, I should be able to list worlds.
     CLOSED: [2024-06-27 Thu 00:58]
@@ -19,8 +19,8 @@ Oh by golly, that's a mountain.
     CLOSED: [2024-06-27 Thu 00:58]
 *** DONE As a world owner, I should be able to edit my world.
     CLOSED: [2024-06-27 Thu 16:52]
-*** TODO As a world owner, I should be able to unlist my world.
-*** TODO As a world owner, I should be able to hide my world.
+*** DONE As a world owner, I should be able to unlist my world.
+    CLOSED: [2024-06-28 Fri 23:16]
 *** TODO As a world owner, I should be able to invite other users to write in my private world.
 *** DONE As a user, I should be able to browse stories in a world.
     CLOSED: [2024-06-27 Thu 16:52]
@@ -91,5 +91,13 @@ Can you make buckets or biscuits of this?
   - Example complexity:  Which layer in Django should calculate the slug? Django signals? Override model.save? Create a custom form?
   - What are the benefits?
     - SEO? Most of the site will be behind a login wall.
-    - Users knowing “at a glance” where they are? Most users will likely be accessing the site from an app or their phone.
-- 
+    - Users knowing “at a glance” where they are? Most users will
+      likely be accessing the site from an app or their phone.
+
+*** 2024-06-28
+- Worlds will be created as unlisted by default.
+  - The user who wants to share the world with their friends can do so
+    without learning the permission system.
+  - The user who wants to hide their worlds from the public can rest
+    easy knowing their work will not be on any public listings, and
+    true privacy is only a single click away.

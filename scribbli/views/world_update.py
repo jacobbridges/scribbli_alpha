@@ -9,7 +9,7 @@ from scribbli.views.mixins import IsOwnerMixin
 class WorldUpdateView(LoginRequiredMixin, IsOwnerMixin, UpdateView):
     template_name = 'universe/world-update.html'
     model = World
-    fields = ["name"]
+    fields = ['name', 'visibility']
     context_object_name = 'world'
 
     def get_success_url(self):
