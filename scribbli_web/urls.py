@@ -31,6 +31,9 @@ urlpatterns = [
     path('my/home/', sv.HomeView.as_view(), name='my_home'),
     path('my/p/characters-select/', sv.MyPartialCharacterListView.as_view(purpose='select'), name='my_p_characters_select'),
 
+    # My actionable urls
+    path('logout/', sv.LogoutView.as_view(), name='logout'),
+
     # Universe urls
     path('universe/', sv.WorldListView.as_view(), name='universe_world_list'),
     path('universe/world/new/', sv.WorldCreateView.as_view(), name='universe_world_create'),

@@ -1,4 +1,4 @@
-{% extends "_layout/_base.html" %}
+{% extends "_layout/_base_app.html" %}
 
 {% block title %}Scribbli | Home{% endblock %}
 
@@ -12,8 +12,10 @@
                 <a href="{% url 'universe_world_detail' world.id %}">{{ world.name }}</a>
             </li>
         {% empty %}
-            {% comment %}TODO: Update link when world creation page is available.{% endcomment %}
-            <li>You have not created any worlds yet, [start here]!</li>
+            <li>
+                You have not created any worlds yet,
+                <a href="{% url 'universe_world_create' %}">start here!</a>
+            </li>
         {% endfor %}
     </ul>
 
@@ -25,9 +27,14 @@
             </li>
         {% empty %}
             {% comment %}
-                TODO: Add tabbed filters for "I am authoring" and "I am reading".
+                TODO: ★ Add tabbed filters for "I am authoring" and "I am reading". 
             {% endcomment %}
-            <li>You have not written any stories yet, [explore the universe and write your first story]!</li>
+            <li>
+                You have not written any stories yet,
+                <a href="{% url 'universe_world_list' %}">explore the universe</a>
+                and choose a world to begin your story. Or, browse
+                <a href="{% url 'universe_world_list' %}">stories written by other authors</a>.
+            </li>
         {% endfor %}
     </ul>
 
