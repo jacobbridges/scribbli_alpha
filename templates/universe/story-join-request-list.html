@@ -34,4 +34,11 @@
             {% endfor %}
         </tbody>
     </table>
+    
+    <h2>Actions</h2>
+    <ul>
+        <li>
+            <a href="{% url 'story_detail' story.id %}">Story Page</a>
+        </li>
+    </ul>
 {% endblock %}

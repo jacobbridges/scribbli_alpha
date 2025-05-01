@@ -4,6 +4,15 @@
 
 {% block body %}
     <h1>New Character on {{ world.name }}</h1>
+    
+    <p>
+        This character will be native to
+        <a href="{% url 'universe_world_detail' world.id %}">{{ world.name }}</a>
+        . To create a character with a different home world,
+        <a href="{% url 'universe_world_list' %}">explore the universe</a>
+        for a different world and choose the "New Character" action
+        for that world.
+    </p>
 
     <form method="post" action="{% url 'universe_character_create' world.id %}">
         {% csrf_token %}
