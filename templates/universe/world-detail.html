@@ -42,7 +42,9 @@
         <ul>
             <li>
                 <a href="{% url 'universe_world_update' world.id %}">Edit World</a>
-                {# TODO: Link to story edit page when ready. #}
+            </li>
+            <li>
+                <a href="{% url 'universe_world_manage_access' world.id %}">Manage Access</a>
             </li>
         </ul>
     {% endif %}

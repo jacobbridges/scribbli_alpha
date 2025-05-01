@@ -4,6 +4,7 @@ from .story_thread import StoryThread
 from .universe import Universe
 from .user import User
 from .world import World
+from .world_share import WorldShare
 from .character import Character
 
 # weird

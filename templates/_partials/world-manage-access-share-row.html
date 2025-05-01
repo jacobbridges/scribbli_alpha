@@ -1,0 +1,15 @@
+{% csrf_token %}
+<span class="td updated">{{ share.user.username }}</span>
+<span class="td updated">
+    <input type="checkbox" name="can_create_characters" {{ share.can_create_characters|yesno:"checked,id" }} />
+</span>
+<span class="td updated">
+    <input type="checkbox" name="can_create_stories" {{ share.can_create_stories|yesno:"checked,id" }} />
+</span>
+<span class="td updated">
+    <input type="checkbox" name="can_edit_world" {{ share.can_edit_world|yesno:"checked,id" }} />
+</span>
+<span class="td">
+    <input type="submit" name="action" value="Edit">
+    <input type="submit" name="action" value="Remove">
+</span>

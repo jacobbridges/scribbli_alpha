@@ -1,0 +1,125 @@
+{% extends "_layout/_base_app.html" %}
+
+{% block title %}Scribbli - Manage Access for {{ world.name }}{% endblock %}
+
+{% block head_extras %}
+<style>
+    div.table
+    {
+        display:table;
+    }
+    form.tr, div.tr
+    {
+        display:table-row;
+    }
+    span.td
+    {
+        display:table-cell;
+    }
+    .error 
+    {
+        color: firebrick;
+    }
+    .updated
+    {
+        animation: flash 1s forwards linear normal;
+    }
+    @keyframes flash {
+      0% {
+         background-color: unset;
+      }
+      4% {
+        background-color: green;
+      }
+      100% {
+        background-color: unset;
+      }
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+    <h1>Manage Access for {{ world.name }}</h1>
+
+    {# Callout if world is not PRIVATE #}
+    {% if world.visibility != world.VISIBILITY_CHOICES.PRIVATE %}
+        <p>
+            ⚠️ This world is set to
+            <mark>{{ world.get_visibility_display }}</mark>
+            which means anyone can view the world. 
+            To deny general access and grant view access to
+            individual users, set the world's visibility to
+            <b>{{ world.VISIBILITY_CHOICES.PRIVATE|title }}</b>
+            on the 
+            <a href="{% url 'universe_world_update' world.pk %}">world edit page</a>.
+        </p>
+    {% endif %}
+
+    {# List current shares #}
+    <h2>Access List</h2>
+    <div class="table">
+        <div class="tr">
+            <span class="td">Username</span>
+            <span class="td">Can Create Characters</span>
+            <span class="td">Can Create Stories</span>
+            <span class="td">Can Edit World</span>
+            <span class="td">Action</span>
+        </div>
+        {% for share in share_list %}
+            <form class="tr"
+                  hx-post="{% url 'universe_world_manage_access' world.id %}"
+                  hx-vals='{"id": "{{ share.id }}"}'
+                  hx-target="this"
+            >
+                {% csrf_token %}
+                <span class="td">{{ share.user.username }}</span>
+                <span class="td">
+                    <input type="checkbox" name="can_create_characters" {{ share.can_create_characters|yesno:"checked,id" }} />
+                </span>
+                <span class="td">
+                    <input type="checkbox" name="can_create_stories" {{ share.can_create_stories|yesno:"checked,id" }} />
+                </span>
+                <span class="td">
+                    <input type="checkbox" name="can_edit_world" {{ share.can_edit_world|yesno:"checked,id" }} />
+                </span>
+                <span class="td">
+                    <input type="submit" name="action" value="Edit">
+                    <input type="submit" name="action" value="Remove">
+                </span>
+            </form>
+        {% endfor %}
+        <form class="tr"
+              hx-ext="response-targets"
+              hx-post="{% url 'universe_world_manage_access' world.id %}"
+              hx-vals='{"action": "add"}'
+              hx-target-4*=".error"
+              hx-target="this"
+        >
+            {% csrf_token %}
+            <span class="td">
+                <input name="username" type="text" placeholder="Type username here"><br>
+                <span class="error"></span>
+            </span>
+            <span class="td">
+                <input type="checkbox" name="can_create_characters" />
+            </span>
+            <span class="td">
+                <input type="checkbox" name="can_create_stories" />
+            </span>
+            <span class="td">
+                <input type="checkbox" name="can_edit_world" />
+            </span>
+            <span class="td">
+                <input type="submit" value="Add">
+            </span>
+        </form>
+    </div>
+
+    <h2>Actions</h2>
+    <ul>
+        <li>
+            <a href="{% url 'universe_world_detail' world.id %}">Back</a>
+        </li>
+    </ul>
+
+{% endblock %}

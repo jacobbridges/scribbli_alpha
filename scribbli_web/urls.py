@@ -39,6 +39,7 @@ urlpatterns = [
     path('universe/world/new/', sv.WorldCreateView.as_view(), name='universe_world_create'),
     path('universe/world/<int:pk>/', sv.WorldDetailView.as_view(), name='universe_world_detail'),
     path('universe/world/<int:pk>/edit/', sv.WorldUpdateView.as_view(), name='universe_world_update'),
+    path('universe/world/<int:pk>/manage-access/', sv.WorldManageAccess.as_view(), name='universe_world_manage_access'),
     path('universe/world/<int:pk>/story/new/', sv.StoryCreateView.as_view(), name='universe_story_create'),
     path('universe/world/<int:pk>/stories/', sv.WorldStoryListView.as_view(), name='universe_world_story_list'),
     path('universe/world/<int:pk>/character/new/', sv.CharacterCreateView.as_view(), name='universe_character_create'),
