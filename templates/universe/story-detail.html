@@ -1,6 +1,6 @@
 {% extends "_layout/_base_app.html" %}
 
-{% block title %}Scribbli - Ready {{ story.name }}{% endblock %}
+{% block title %}Scribbli - {{ story.name }}{% endblock %}
 
 {% comment %}
 	Eventually this page will be split out into multiple pages:
@@ -86,7 +86,7 @@
     <h2>Links</h2>
     <ul>
         <li>
-            <a href="#">Read Story</a>
+            <a href="{% url 'story_reader' story.id %}">Read Story</a>
         </li>
         <li>
             <a href="{% url 'universe_world_detail' story.world_id %}">{{ story.world.name }}</a>

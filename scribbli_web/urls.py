@@ -54,4 +54,5 @@ urlpatterns = [
     path('story/<int:pk>/join_request/new/', sv.StoryJoinRequestSubmitView.as_view(), name='story_join_request_submit'),
     path('story/<int:pk>/join-requests/', sv.StoryJoinRequestList.as_view(), name='story_join_request_list'),
     path('story/<int:pk>/join-request/resolve/', sv.StoryJoinRequestResolveView.as_view(), name='story_join_request_resolve'),
+    path('story/<int:pk>/read/', sv.StoryReaderView.as_view(), name='story_reader'),
 ]

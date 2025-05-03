@@ -15,6 +15,7 @@ from .story_update import StoryUpdateView
 from .story_join_request_list import StoryJoinRequestList
 from .story_join_request_submit import StoryJoinRequestSubmitView
 from .story_join_request_resolve import StoryJoinRequestResolveView
+from .story_reader import StoryReaderView
 from .character_create import CharacterCreateView
 from .character_detail import CharacterDetailView
 from .character_update import CharacterUpdateView

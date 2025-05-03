@@ -1,0 +1,74 @@
+{% extends "_layout/_base_app.html" %}
+
+{% block title %}Scribbli - Read {{ story.name }}{% endblock %}
+
+{% comment %}
+	Eventually this page will be split out into multiple pages:
+	    - [ ] Page which story owner sees.
+	    - [ ] Page which co-authors see.
+	    - [ ] Page which everyone else sees.
+{% endcomment %}
+
+{% block body %}
+    <h1>{{ story.name }}</h1>
+    <small>Author: {{ story.owner.username }}</small>
+    <hr>
+    <select name="current_thread_id"
+            _="on change set :loc to the location of window
+               then set :newLoc to :loc.origin + :loc.pathname + '?thread_id=' + event.target.value
+               go to url `${:newLoc}`
+              "
+    >
+        {% for thread in thread_list %}
+            <option value="{{ thread.id }}" {% if thread.id == current_thread.id %}selected{% endif %}>{{ thread.name }}</option>
+        {% endfor %}
+    </select>
+
+
+    <h2>{{ current_thread.name }}</h2>
+
+    {% for post in post_list %}
+    	<div>
+            <span>{{ post.author.username }} - as {{ post.character.name }}</span>
+            <pre>
+                {{ post.content }}
+            </pre>
+        </div>
+    {% endfor %}
+
+    {% if available_character_list %}
+        <form class="new-post"
+              action="<TODO: view for new post>"
+              hx-ext="response-targets"
+              hx-post="{# TODO: Add url for creating new posts #}"
+        >
+            {% csrf_token %}
+            <div>
+                Post as: <select name="character_id">
+                    {% for character in available_character_list %}
+                        <option value="{{ character.id }}">{{ character.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <textarea name="content" cols="30" rows="10"></textarea>
+            </div>
+        </form>
+    {% endif %}
+
+
+    <h2>Links</h2>
+    <ul>
+        <li>
+            <a href="{% url 'story_detail' story.id %}">{{ story.name }}</a>
+        </li>
+        <li>
+            <a href="{% url 'universe_world_detail' story.world_id %}">{{ story.world.name }}</a>
+        </li>
+    </ul>
+
+    {% if is_owner %}
+        <h2>Owner-Only Actions</h2>
+    {% endif %}
+
+{% endblock %}

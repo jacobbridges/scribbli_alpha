@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView
 from django.urls import reverse
 
-from scribbli.models import Story, World
+from scribbli.models import Story, World, StoryThread
 
 
 class StoryCreateView(LoginRequiredMixin, CreateView):
@@ -27,7 +27,20 @@ class StoryCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.owner = self.request.user
         form.instance.world = self.world
-        return super().form_valid(form)
+        result = super().form_valid(form)
+        # Create the two default threads that every story should have
+        StoryThread.objects.create(
+            name="Main",
+            system_name="main",
+            story=self.object,
+        )
+        StoryThread.objects.create(
+            name="OOC",
+            system_name="ooc",
+            story=self.object,
+        )
+        return result
+
 
     def get_success_url(self):
         return reverse(
