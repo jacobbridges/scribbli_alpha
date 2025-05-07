@@ -1,6 +1,6 @@
 from .story import Story
-from .story_post import StoryPost
-from .story_thread import StoryThread
+from .post import Post, ICPost, TalkPost, NarratorPost
+from .thread import Thread, StoryThread, TalkThread
 from .universe import Universe
 from .user import User
 from .world import World

@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView
 
-from scribbli.models import Story, StoryThread
+from scribbli.models import Story, Thread
 
 
 class StoryReaderView(LoginRequiredMixin, DetailView):
@@ -26,7 +26,7 @@ class StoryReaderView(LoginRequiredMixin, DetailView):
 
     def get_current_thread(self):
         if thread_id := self.request.GET.get('thread_id', None):
-            self._thread = StoryThread.objects.get(id=thread_id)
+            self._thread = Thread.objects.get(id=thread_id)
             return self._thread
         self._thread = self.object.threads.get(system_name="main")
         return self._thread
